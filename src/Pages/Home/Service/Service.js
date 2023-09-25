@@ -31,5 +31,4 @@ const Service = (props) => {
     </Grid>
   );
 };
-
 export default Service;

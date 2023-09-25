@@ -2,16 +2,17 @@ import { format } from "date-fns";
 import React from "react";
 import { DayPicker } from "react-day-picker";
 
-const Calendar = ({selectedDate, setSelectedDate}) => {
+const Calendar = ({date, setDate}) => {
   
   return (
   <div>
+      <h3>Select Date </h3>
       <DayPicker
       mode="single"
-      selected={selectedDate}
-      onSelect={setSelectedDate}
+      selected={date}
+      onSelect={setDate}
     />
-    <p>You have selected date : {format(selectedDate, 'PP')} </p>
+    {/* <p>You have selected date : {format(date, 'PP')} </p> */}
   </div>
   );
 };

@@ -4,12 +4,12 @@ import AppointmentHeader from "../AppointmentHeader/AppointmentHeader";
 import AvailableAppointment from "../AvailableAppointment/AvailableAppointment";
 
 const Appointment = () => {
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [date, setDate] = useState(new Date());
   return (
     <div>
       <Navigation></Navigation>
-      <AppointmentHeader selectedDate={selectedDate} setSelectedDate={setSelectedDate}></AppointmentHeader>
-      <AvailableAppointment selectedDate={selectedDate}></AvailableAppointment>
+      <AppointmentHeader date={date} setDate={setDate}></AppointmentHeader>
+      <AvailableAppointment date={date}></AvailableAppointment>
     </div>
   );
 };

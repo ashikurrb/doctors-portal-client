@@ -1,6 +1,7 @@
 import { Backdrop, Box, Button, Fade, Modal, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import React, { useState } from "react";
+import useAuth from "../../../hooks/useAuth";
 
 const style = {
   position: "absolute",
@@ -18,13 +19,47 @@ const BookingModal = ({
   openBooking,
   handleBookingClose,
   booking,
-  selectedDate,
+  date,
+  setBookingSuccess,
 }) => {
   const { name, time, price, space } = booking;
+  const { user } = useAuth();
+  const initialInfo = { patientName: user.displayName, email: user.email, phone: '' }
+  const [bookingInfo, setBookingInfo] = useState(initialInfo);
+
+  const handleOnBlur = e => {
+    const field = e.target.name;
+    const value = e.target.value;
+    const newInfo = { ...bookingInfo };
+    newInfo[field] = value;
+    setBookingInfo(newInfo);
+  }
 
   const handleBookSubmit = (e) => {
-    alert("Your appointment has been booked successfully");
-    handleBookingClose();
+    const appointment = {
+      ...bookingInfo,
+      time,
+      serviceName: name,
+      date: date.toLocaleDateString()
+    }
+
+    //send to server
+    fetch('http://localhost:5000/appointments', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(appointment)
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.insertedId) {
+          setBookingSuccess(true)
+          handleBookingClose();
+        } else {
+          alert('Booking Unsuccessful! Pls Try Again')
+        }
+      })
     e.preventDefault();
   }
 
@@ -54,7 +89,7 @@ const BookingModal = ({
           </Typography>
 
           <form onSubmit={handleBookSubmit
-        }>
+          }>
             <TextField
               disabled
               sx={{ width: "100%", mb: 3 }}
@@ -69,24 +104,33 @@ const BookingModal = ({
               sx={{ width: "100%", mb: 3 }}
               label="Date"
               id="outlined-size-small"
-              defaultValue={selectedDate.toDateString()}
+              defaultValue={date.toDateString()}
               size="small"
             />
             <TextField
               sx={{ width: "100%", mb: 3 }}
+              name="patientName"
               label="Name"
+              defaultValue={user.displayName}
+              onBlur={handleOnBlur}
               id="outlined-size-small"
               size="small"
             />
             <TextField
               sx={{ width: "100%", mb: 3 }}
+              name="phone"
+              inputProps={{ maxLength: 11, minLength: 11 }}
               label="Phone Number"
+              onBlur={handleOnBlur}
               id="outlined-size-small"
               size="small"
             />
             <TextField
               sx={{ width: "100%", mb: 3 }}
+              name="email"
               label="Email"
+              defaultValue={user.email}
+              onBlur={handleOnBlur}
               id="outlined-size-small"
               size="small"
             />

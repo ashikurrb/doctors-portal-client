@@ -3,6 +3,7 @@ import Grid from "@mui/material/Grid";
 import chair from "../../../images/chair.png";
 import bg from "../../../images/bg.png";
 import { Button, Typography, Container, Box } from "@mui/material";
+import { NavLink } from "react-router-dom";
 
 const bannerBg = {
   backgroundImage: `url(${bg})`,
@@ -31,9 +32,7 @@ const Banner = () => {
               Molestias cumque vero, facere ad suscipit architecto aperiam? Qui
               dolores dolorum voluptatum.
             </Typography>
-            <Button variant="contained" style={{ backgroundColor: "#5CE7ED" }}>
-              GET APPOINTMENT
-            </Button>
+            <NavLink to="/appointment"><Button variant='contained' style={{ backgroundColor: "#5CE7ED" }}>   GET APPOINTMENT</Button></NavLink>
           </Box>
         </Grid>
         <Grid item xs={12} md={6} style={verticalCenter}>
