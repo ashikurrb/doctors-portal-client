@@ -107,7 +107,7 @@ const BookingModal = ({
               defaultValue={date.toDateString()}
               size="small"
             />
-            <TextField
+            <TextField required 
               sx={{ width: "100%", mb: 3 }}
               name="patientName"
               label="Name"
@@ -116,16 +116,16 @@ const BookingModal = ({
               id="outlined-size-small"
               size="small"
             />
-            <TextField
+            <TextField required 
               sx={{ width: "100%", mb: 3 }}
               name="phone"
-              inputProps={{ maxLength: 11, minLength: 11 }}
-              label="Phone Number"
+              inputProps={{ maxLength: 11, minLength: 11 } }
+              label= "Phone Number"
               onBlur={handleOnBlur}
               id="outlined-size-small"
               size="small"
             />
-            <TextField
+            <TextField required 
               sx={{ width: "100%", mb: 3 }}
               name="email"
               label="Email"

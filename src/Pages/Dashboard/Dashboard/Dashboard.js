@@ -40,9 +40,9 @@ function Dashboard(props) {
 
             <Toolbar />
             <Divider />
-                <Link to="/appointment"> <Button color="inherit">Book another Appointment</Button></Link>
-                <Link to="/dashboard"><Button color="inherit">Dashboard</Button></Link>
-             { <Box>
+            <Link to="/appointment"> <Button color="inherit">Book another Appointment</Button></Link>
+            <Link to="/dashboard"><Button color="inherit">Dashboard</Button></Link>
+            {<Box>
                 <Link to={`/dashboard/makeAdmin`}><Button color="inherit">Make Admin</Button></Link>
                 <Link to={`/dashboard/addDoctor`}><Button color="inherit">Add Doctor</Button></Link>
             </Box>}
@@ -129,8 +129,8 @@ function Dashboard(props) {
                 component="main"
                 sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
             >
-                <Outlet></Outlet>
-
+                <br />
+                <DashboardHome></DashboardHome>
                 <Toolbar />
 
             </Box>
